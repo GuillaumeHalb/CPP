@@ -218,21 +218,16 @@ Dvector Dvector::operator- ()
 }
 
 /*
-std::ostream& Dvector::operator<< (std::ostream &Out, const Dvector A)
+ostream & Dvector::operator <<(ostream &Out, const Dvector &A)
 {
-  Out<<"dimension : "<<A.dim<<endl;
-  Out<<"coordonnée : "<<endl;
-  for (int i = 0; i < A.dim; i++) 
-    {
-      Out<<A.coord[i]<<endl;
-    }
+  A.display(Out);
   return Out;
 }
 
-std::istream& Dvector::operator>> (std::istream &In, const Dvector A)
+istream& Dvector::operator>> (std::istream &In, const Dvector &A)
 {
   In>>A.dim;
-  for (int i = 0; i < A.dim; i++) 
+  for (int i = 0; i < A.size(); i++) 
     {
       In>>A.coord[i];
     }
@@ -242,12 +237,7 @@ std::istream& Dvector::operator>> (std::istream &In, const Dvector A)
 
 std::ostream& Dvector::operator<< (std::ostream &Out)
 {
-  Out<<"dimension : "<<dim<<endl;
-  Out<<"coordonnée : "<<endl;
-  for (int i = 0; i < dim; i++) 
-    {
-      Out<<coord[i]<<endl;
-    }
+  this->display(Out);
   return Out;
 }
 
@@ -260,6 +250,7 @@ std::istream& Dvector::operator>> (std::istream &In)
     }
   return In;
 }
+
 
 Dvector& Dvector::operator += (double d)
 {

@@ -109,14 +109,13 @@ public :
   Dvector operator+ (Dvector B);
   Dvector operator- (Dvector B);
   Dvector operator- ();
-
-  /*  
-  std::ostream& operator<< (std::ostream &Out, const Dvector A);
-  std::istream& operator>> (std::istream &In, const Dvector A);
+ 
+  /*
+  std::ostream& operator<< (std::ostream &Out, const Dvector &A);
+  std::istream& operator>> (std::istream &In, const Dvector &A);
   */
   std::ostream& operator<< (std::ostream &Out);
   std::istream& operator>> (std::istream &In);
-
 
   Dvector& operator += (double d);
   Dvector& operator -= (double d);
