@@ -98,7 +98,7 @@ public :
   double* coordonnees();
 
   // Accesseur à l'élément i
-  //  double & operator()(const int i, Dvector A);
+  //double & operator()(const int i, Dvector A);
   double& operator()(int i);
     
   // Surcharges d'opérateur

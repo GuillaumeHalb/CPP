@@ -130,15 +130,14 @@ double& Dvector::operator() (const int i, Dvector A)
 
 double& Dvector::operator() (int i)
 {
-  Dvector &D = *this;
-  if (i >= D.size() || i < 0) 
+  if (i >= dim || i < 0) 
     {
     cout<<"argument invalide"<<endl;
     exit(-1);
     }
   else 
     {
-      return D.coord[i];
+      return coord[i];
     }
 }
 
