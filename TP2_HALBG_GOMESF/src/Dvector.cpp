@@ -47,11 +47,6 @@ Dvector::~Dvector() {
 // Affiche le Dvector
 void Dvector::display (std::ostream &str) 
 {
-  str<<std::endl;
-  str<<"Affichage du vecteur : "<<std::endl;
-  str<<"dimension : ";
-  str<<dim<<std::endl;
-  str<<"coordonnees : "<<std::endl;
   for (int i = 0; i < dim; i++) 
     {
       str<<coord[i]<<std::endl;
@@ -60,14 +55,17 @@ void Dvector::display (std::ostream &str)
 
 int Dvector::size() 
 {
-  std::cout<<endl;
-  std::cout<<"Appel de la methode size()"<<endl;
   return dim;
 }
 
 
 int Dvector::fillRandomly() {
-  srand(time(0));
+  static bool init = false;
+  if (!init) 
+  {
+    init= true;
+    srand(time(0));
+  }
   for (int i = 0; i < dim; i++) {
     coord[i] = (double) rand()/RAND_MAX;
   }
