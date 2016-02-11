@@ -111,20 +111,19 @@ Dvector::Dvector(std::string s)
 
 }
 
-/*
-double& Dvector::operator() (const int i, Dvector A)
+double& Dvector::operator() (int i) const
 {
-  if (i >= A.dim || i < 0) 
+  if (i >= dim || i < 0) 
     {
     cout<<"argument invalide"<<endl;
     exit(-1);
     }
   else 
     {
-      return A.coord[i];
+      return coord[i];
     }
 }
-*/
+
 
 double& Dvector::operator() (int i)
 {
