@@ -58,7 +58,7 @@ public :
  *
  * \param str flux servant à l'affichage, ne peut être NULL.
  */
-  void display (std::ostream &str);
+  void display (std::ostream &str) const;
 
   /**
  * \fn int Dvector::size()
@@ -66,7 +66,7 @@ public :
  *
  * \return entier correspondant à la taille (ou dimension) du vecteur.
  */
-  int size();
+  int size() const;
 
 /**
  * \fn int Dvector::fillRandomly()
@@ -124,6 +124,8 @@ public :
   Dvector& operator += (Dvector A);
   Dvector& operator -= (Dvector A);
 };
+  std::ostream& operator<< (std::ostream &Out, const Dvector &A);
+  std::istream& operator>> (std::istream &In, const Dvector &A);
 
 
 #endif /* DVECTOR_H_ */

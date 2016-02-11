@@ -45,7 +45,7 @@ Dvector::~Dvector() {
 }
 
 // Affiche le Dvector
-void Dvector::display (std::ostream &str) 
+void Dvector::display (std::ostream &str) const 
 {
   for (int i = 0; i < dim; i++) 
     {
@@ -53,7 +53,7 @@ void Dvector::display (std::ostream &str)
     }
 }
 
-int Dvector::size() 
+int Dvector::size() const
 {
   return dim;
 }
@@ -217,25 +217,25 @@ Dvector Dvector::operator- ()
   return A;
 }
 
-/*
-ostream & Dvector::operator <<(ostream &Out, const Dvector &A)
+
+ostream & operator <<(ostream &Out, const Dvector &A)
 {
   A.display(Out);
   return Out;
 }
 
-istream& Dvector::operator>> (std::istream &In, const Dvector &A)
+istream& operator>> (std::istream &In, const Dvector &A)
 {
-  In>>A.dim;
+  In>>A.size();
   for (int i = 0; i < A.size(); i++) 
     {
-      In>>A.coord[i];
+      In>>A(i);
     }
   return In;
 }
-*/
 
-std::ostream& Dvector::operator<< (std::ostream &Out)
+/*
+std::ostream& operator<< (std::ostream &Out)
 {
   this->display(Out);
   return Out;
@@ -250,7 +250,7 @@ std::istream& Dvector::operator>> (std::istream &In)
     }
   return In;
 }
-
+*/
 
 Dvector& Dvector::operator += (double d)
 {
