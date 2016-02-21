@@ -95,37 +95,36 @@ public :
      */
   Dvector(std::string s);
 
-  double* coordonnees();
-
   // Accesseur à l'élément i
-  double& operator()(int i) const;
-  double& operator()(int i);
+  double& operator()(const int i) const;
+  double& operator()(const int i);
     
   // Surcharges d'opérateur
-  Dvector operator+ (double d);
-  Dvector operator- (double d);
-  Dvector operator* (double d);
-  Dvector operator/ (double d);
-  Dvector operator+ (Dvector B);
-  Dvector operator- (Dvector B);
-  Dvector operator- ();
+  Dvector operator+ (const double d) const;
+  Dvector operator- (const double d) const;
+  Dvector operator* (const double d) const;
+  Dvector operator/ (const double d) const;
+  Dvector operator+ (const Dvector B) const;
+  Dvector operator- (const Dvector B) const;
+  Dvector operator- () const;
  
-  /*
-  std::ostream& operator<< (std::ostream &Out, const Dvector &A);
-  std::istream& operator>> (std::istream &In, const Dvector &A);
-  */
-  std::ostream& operator<< (std::ostream &Out);
-  std::istream& operator>> (std::istream &In);
+  Dvector& operator += (const double d);
+  Dvector& operator -= (const double d);
+  Dvector& operator *= (const double d);
+  Dvector& operator /= (const double d);
+  Dvector& operator += (const Dvector A);
+  Dvector& operator -= (const Dvector A);
 
-  Dvector& operator += (double d);
-  Dvector& operator -= (double d);
-  Dvector& operator *= (double d);
-  Dvector& operator /= (double d);
-  Dvector& operator += (Dvector A);
-  Dvector& operator -= (Dvector A);
+  void operator =(const Dvector &D);
+
+  bool operator==(const Dvector &D) const;
+
+  void resize(const int d, const double v);
 };
-  std::ostream& operator<< (std::ostream &Out, const Dvector &A);
-  std::istream& operator>> (std::istream &In, const Dvector &A);
+std::ostream& operator<< (std::ostream &Out, const Dvector &A);
+std::istream& operator>> (std::istream &In, const Dvector &A);
+
+
 
 
 #endif /* DVECTOR_H_ */

@@ -10,6 +10,7 @@
 #include <cstdlib> // bibliothèque pour rand()
 #include <fstream>
 #include <string>
+#include <memory.h>
 
 using namespace std;
 using std::ifstream; 
@@ -48,9 +49,7 @@ Dvector::~Dvector() {
 void Dvector::display (std::ostream &str) const 
 {
   for (int i = 0; i < dim; i++) 
-    {
       str<<coord[i]<<std::endl;
-    }
 }
 
 int Dvector::size() const
@@ -111,7 +110,20 @@ Dvector::Dvector(std::string s)
 
 }
 
-double& Dvector::operator() (int i) const
+double& Dvector::operator() (const int i) const
+{
+  if (i >= dim || i < 0) 
+    {
+    cout<<"argument invalide"<<endl;
+    exit(-1);
+    }
+  else 
+    {
+      return coord[i];
+    }
+}
+
+double& Dvector::operator() (const int i)
 {
   if (i >= dim || i < 0) 
     {
@@ -125,31 +137,15 @@ double& Dvector::operator() (int i) const
 }
 
 
-double& Dvector::operator() (int i)
-{
-  if (i >= dim || i < 0) 
-    {
-    cout<<"argument invalide"<<endl;
-    exit(-1);
-    }
-  else 
-    {
-      return coord[i];
-    }
-}
-
-
-Dvector Dvector::operator+ (double d)
+Dvector Dvector::operator+ (const double d) const
 {
   Dvector A(dim);
   for (int i = 0; i < dim; i++) 
-    {
-      A.coord[i] = this->coord[i] + d;
-    }
+    A(i) = this->coord[i] + d;
   return A;
 }
 
-Dvector Dvector::operator- (double d)
+Dvector Dvector::operator- (const double d) const
 {
   Dvector A(dim);
   for (int i = 0; i < dim; i++) 
@@ -159,7 +155,7 @@ Dvector Dvector::operator- (double d)
   return A;
 }
 
-Dvector Dvector::operator* (double d)
+Dvector Dvector::operator* (const double d) const
 {
   Dvector A(dim);
   for (int i = 0; i < dim; i++) 
@@ -169,7 +165,7 @@ Dvector Dvector::operator* (double d)
   return A;
 }
 
-Dvector Dvector::operator/ (double d)
+Dvector Dvector::operator/ (const double d) const
 {
   if (d == 0)
     {
@@ -187,27 +183,27 @@ Dvector Dvector::operator/ (double d)
     }
 }
 
-Dvector Dvector::operator+ (Dvector B)
+Dvector Dvector::operator+ (const Dvector B) const
 {
   Dvector A(dim);
   for (int i = 0; i < dim; i++) 
     {
-      A.coord[i] = this->coord[i] + B.coord[i];
+      A.coord[i] = this->coord[i] + B(i);
     }
   return A;
 }
 
-Dvector Dvector::operator- (Dvector B)
+Dvector Dvector::operator- (const Dvector B) const
 {
   Dvector A(dim);
   for (int i = 0; i < dim; i++) 
     {
-      A.coord[i] = this->coord[i] - B.coord[i];
+      A.coord[i] = this->coord[i] - B(i);
     }
   return A;
 }
 
-Dvector Dvector::operator- ()
+Dvector Dvector::operator- () const
 {
   Dvector A(dim);
   for (int i = 0; i < dim; i++) 
@@ -217,7 +213,6 @@ Dvector Dvector::operator- ()
   return A;
 }
 
-
 ostream & operator <<(ostream &Out, const Dvector &A)
 {
   A.display(Out);
@@ -226,33 +221,12 @@ ostream & operator <<(ostream &Out, const Dvector &A)
 
 istream& operator>> (std::istream &In, const Dvector &A)
 {
-  In>>A.size();
   for (int i = 0; i < A.size(); i++) 
-    {
-      In>>A(i);
-    }
+    In >> A(i);
   return In;
 }
 
-/*
-std::ostream& operator<< (std::ostream &Out)
-{
-  this->display(Out);
-  return Out;
-}
-
-std::istream& Dvector::operator>> (std::istream &In)
-{
-  In>>dim;
-  for (int i = 0; i < dim; i++) 
-    {
-      In>>coord[i];
-    }
-  return In;
-}
-*/
-
-Dvector& Dvector::operator += (double d)
+Dvector& Dvector::operator += (const double d)
 {
   Dvector& D = *this;
 
@@ -262,7 +236,7 @@ Dvector& Dvector::operator += (double d)
   return D;
 }
 
-Dvector& Dvector::operator -= (double d)
+Dvector& Dvector::operator -= (const double d)
 {
   Dvector& D = *this;
 
@@ -272,7 +246,7 @@ Dvector& Dvector::operator -= (double d)
   return D;
 }
 
-Dvector& Dvector::operator *= (double d)
+Dvector& Dvector::operator *= (const double d)
 {
   Dvector& D = *this;
 
@@ -282,7 +256,7 @@ Dvector& Dvector::operator *= (double d)
   return D;
 }
 
-Dvector& Dvector::operator /= (double d)
+Dvector& Dvector::operator /= (const double d)
 {
   if (d == 0.0) {
     exit(-1); // division par 0
@@ -297,9 +271,9 @@ Dvector& Dvector::operator /= (double d)
   }
 }
 
-Dvector& Dvector::operator += (Dvector A)
+Dvector& Dvector::operator += (const Dvector A)
 {
-  if (A.dim != this->dim) 
+  if (A.size() != this->dim) 
     {
       exit(-1); // dimensions incompatibles
     }
@@ -308,15 +282,15 @@ Dvector& Dvector::operator += (Dvector A)
       Dvector& D = *this; 
       for (int i = 0; i < dim; i++) 
 	{
-	  D.coord[i] += A.coord[i];
+	  D.coord[i] += A(i);
 	}
       return D;
     }
 }
 
-Dvector& Dvector::operator -= (Dvector A)
+Dvector& Dvector::operator -= (const Dvector A)
 {
-  if (A.dim != this->dim) 
+  if (A.size() != this->dim) 
     {
       exit(-1); // dimensions incompatibles
     }
@@ -325,8 +299,66 @@ Dvector& Dvector::operator -= (Dvector A)
       Dvector& D = *this; 
       for (int i = 0; i < dim; i++) 
 	{
-	  D.coord[i] += A.coord[i];
+	  D.coord[i] -= A(i);
 	}
       return D;
     }
+}
+
+void Dvector::operator=(const Dvector &D)
+{
+  // ATTENTION : Changement de dim possible de this => on fait un resize
+  if (D.size() != size()) 
+    resize(D.size(), 0); // initialisation inutile car on modifie après
+
+  memcpy(coord, D.coord, dim * sizeof(double));
+}
+
+/*
+void Dvector::operator=(const Dvector D)
+{
+  dim = D.size();
+  coord = new double[dim];
+  for (int i = 0; i < dim; i++)
+      coord[i] = D(i);
+}
+*/
+
+bool Dvector::operator==(const Dvector &D) const
+{
+  if (dim != D.size())
+    return false;
+  else
+    {
+      for (int i = 0; i < dim; i++) 
+	{
+	  if (coord[i] != D(i))
+	    return false;
+	}
+    }
+  return true;
+}
+
+void Dvector::resize(const int d, const double v)
+{
+  if (d < dim) // Faire un free ?
+      dim = d;
+  if (d > dim) 
+    {
+      // On fait une allocation
+      double *c = new double[d];
+      // On initialise les coordonnees
+      for (int i = 0; i < d; i++) 
+	{
+	  if (i < dim)
+	    c[i] = coord[i];
+	  else
+	    c[i] = v;
+	}
+      // On libère l'ancien
+      delete [] coord;
+      // Et on fait pointer le nouveau sur l'ancien     
+      coord = c;
+      dim = d;
+    } 
 }
