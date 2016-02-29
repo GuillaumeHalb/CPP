@@ -8,4 +8,4 @@ doc:
 
 clean:
 	cd src/ && $(MAKE) $@
-	#cd docu/ && $(MAKE) $@
+	cd docu/ && $(MAKE) $@

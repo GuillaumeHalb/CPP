@@ -2,17 +2,13 @@ Modelisation et Programmation
 Filipe GOMES
 Guillaume HALB
 
-TP1 : Introduction et Outils
+TP2 : Opérateurs
 
 Analyse
 
-Pour l'écriture :
+2)En passant les paramètres par reférence constante, on évite les copies des dits paramètres, ce qui permet une certaine optimisation (qui est plus ou moins efficace en fonction de la taille mémoire des objets copiés). Comme on ne peut modifier l'argument, on le déclare en tant que const.
 
-Dvector x;
-x = Dvector(3, 1.);
+4)On peut utiliser l'implémentation des opérateurs +, -, *, / pour factoriser celle des opérateurs +=, -=, *=, /= correspondants.
+De même on peut factoriser la fonction display et la surcharge d'opérateur <<, qui a été fait.
 
-On effectue deux allocations, tandis que pour l'écriture :
-
-Dvector x = Dvector(3, 1.);
-
-On effectue qu'une seule allocation.
+5) Pour un vecteur de 10 millions de coordonnées, l'utilisation de memcpy donne un time de 0.029s à la première éxécution puis 0.022 , mais sans memcpy on obtient un time de 0.025s à la première éxécution puis 0.020s.

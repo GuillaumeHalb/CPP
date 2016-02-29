@@ -349,11 +349,11 @@ void Dvector::resize(const int d, const double v)
       double *c = new double[d];
       // On initialise les coordonnees
       for (int i = 0; i < d; i++) 
-	{
-	  if (i < dim)
-	    c[i] = coord[i];
-	  else
-	    c[i] = v;
+	    {
+	       if (i < dim)
+	         c[i] = coord[i];
+	       else
+	         c[i] = v;
 	}
       // On libère l'ancien
       delete [] coord;
