@@ -1,0 +1,18 @@
+Modelisation et Programmation
+Filipe GOMES
+Guillaume HALB
+
+TP1 : Introduction et Outils
+
+Analyse
+
+Pour l'écriture :
+
+Dvector x;
+x = Dvector(3, 1.);
+
+On effectue deux allocations, tandis que pour l'écriture :
+
+Dvector x = Dvector(3, 1.);
+
+On effectue qu'une seule allocation.
