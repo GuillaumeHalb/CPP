@@ -119,9 +119,9 @@ std::ostream& operator<< (std::ostream &Out, const Dvector &A);
 std::istream& operator>> (std::istream &In, const Dvector &A);
 
 Dvector operator+ (const double d, const Dvector &D);
-Dvector operator- (const double d, const Dvector &D);
+Dvector operator- (const Dvector &D, const double d);
 Dvector operator* (const double d, const Dvector &D);
-Dvector operator/ (const double d, const Dvector &D);
+Dvector operator/ (const Dvector &D, const double d);
 
 Dvector operator+ (const Dvector &D, const double d);
 Dvector operator* (const Dvector &D, const double d);

@@ -66,7 +66,7 @@ public :
  *
  * \return entier correspondant à la taille (ou dimension) du vecteur.
  */
-  int size();
+  int size() const;
 
   /*!
      *  \brief Constructeur par copie
@@ -93,15 +93,28 @@ public :
   double& operator()(int i) const;
   double& operator()(int i);
 
+  Darray& operator += (const double d);
+  Darray& operator -= (const double d);
+  Darray& operator *= (const double d);
+  Darray& operator /= (const double d);
+  Darray& operator += (const Darray A);
+  Darray& operator -= (const Darray A);
+
+  Darray& operator =(const Darray &D);
+
+  void resize(const int d, const double v);
 };
 
-Darray operator+ (double d);
-Darray operator- (double d);
-Darray operator* (double d);
-Darray operator/ (double d);
-  
-Darray operator+ (Dvector B);
-Darray operator- (Dvector B);
-Darray operator- ();
+Darray operator+ (const double d, const Darray &D);
+Darray operator- (const Darray &D, const double d);
+Darray operator* (const double d, const Darray &D);
+Darray operator/ (const Darray &D, const double d);
+
+Darray operator+ (const Darray &D, const double d);
+Darray operator* (const Darray &D, const double d);
+
+Darray operator+ (const Darray &B, const Darray &D);
+Darray operator- (const Darray &B, const Darray &D);
+Darray operator- (const Darray &D);
 
 #endif /* DARRAY_H_ */

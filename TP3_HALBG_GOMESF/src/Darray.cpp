@@ -6,10 +6,12 @@
 
 
 #include <iostream>
-#include "Dvector.h"
+#include "Darray.h"
 #include <cstdlib> // bibliothèque pour rand()
 #include <fstream>
 #include <string>
+#include <stdexcept>
+#include <memory.h>
 
 using namespace std;
 using std::ifstream; 
@@ -53,7 +55,7 @@ void Darray::display (std::ostream &str)
     }
 }
 
-int Darray::size() 
+int Darray::size() const
 {
   return dim;
 }
@@ -123,84 +125,172 @@ double& Darray::operator() (int i)
     }
 }
 
-
-Darray Darray::operator+ (double d)
+Darray operator+ (const double d, const Darray &D)
 {
-  Darray A(dim);
-  for (int i = 0; i < dim; i++) 
-    {
-      A.coord[i] = this->coord[i] + d;
-    }
-
+  Darray A(D);
+  for (int i = 0; i < D.size(); i++) 
+    A(i) = D(i) + d;
   return A;
 }
 
-Darray Darray::operator- (double d)
+Darray operator+ (const Darray &D, const double d) 
 {
-  Darray A(dim);
-  for (int i = 0; i < dim; i++) 
-    {
-      A.coord[i] = this->coord[i] - d;
-    }
-  return A;
+  return d + D;
 }
 
-Darray Darray::operator* (double d)
+Darray operator- (const Darray &D, const double d)
 {
-  Darray A(dim);
-  for (int i = 0; i < dim; i++) 
+  return D + (-d);
+}
+
+Darray operator* (const double d, const Darray &D)
+{
+  Darray A(D.size());
+  for (int i = 0; i < D.size(); i++) 
     {
-      A.coord[i] = this->coord[i] * d;
+      A(i) = D(i) * d;
     }
   return A;
 }
 
-Darray Darray::operator/ (double d)
+Darray operator* (const Darray &D, const double d)
+{
+  return d*D;
+}
+
+Darray operator/ (const Darray &D, const double d)
 {
   if (d == 0)
     {
-      cout<<"Division par 0 !"<<endl;
-      exit(-1);
+      throw invalid_argument("Division par 0");
     }
   else 
     {
-      Darray A(dim);
+      return (1/d)*D;
+    }
+}
+
+Darray operator+ (const Darray &B, const Darray &D)
+{
+  Darray A(B.size());
+  for (int i = 0; i < B.size(); i++) 
+    {
+      A(i) = B(i) + D(i);
+    }
+  return A;
+}
+
+Darray operator- (const Darray &B,  const Darray &D)
+{
+  return B + (-D);
+}
+
+Darray operator- (const Darray &D)
+{
+  Darray A(D.size());
+  for (int i = 0; i < D.size(); i++) 
+    {
+      A(i) = -D(i);
+    }
+  return A;
+}
+
+
+
+Darray& Darray::operator += (const double d)
+{
+  Darray& D = *this;
+
+  for (int i = 0; i < D.size(); i++) {
+    D.coord[i] += d;
+  }
+  return D;
+}
+
+Darray& Darray::operator -= (const double d)
+{
+  Darray& D = *this;
+  return D += (-d);
+}
+
+Darray& Darray::operator *= (const double d)
+{
+  Darray& D = *this;
+
+  for (int i = 0; i < D.size(); i++) {
+    D.coord[i] *= d;
+  }
+  return D;
+}
+
+Darray& Darray::operator /= (const double d)
+{
+  if (d == 0.0) {
+    throw invalid_argument("Division par 0");
+  }
+  else {
+    Darray& D = *this;
+    return D *= (1/d);
+  }
+}
+
+
+Darray& Darray::operator += (const Darray A)
+{
+  if (A.size() != this->dim) 
+    {
+      throw invalid_argument("taille incompatible");
+    }
+  else 
+    {
+      Darray& D = *this; 
       for (int i = 0; i < dim; i++) 
 	{
-	  A.coord[i] = this->coord[i] / d;
+	  D.coord[i] += A(i);
 	}
-      return A;
+      return D;
     }
 }
 
-Darray Darray::operator+ (Darray B)
+Darray& Darray::operator -= (const Darray A)
 {
-  Darray A(dim);
-  for (int i = 0; i < dim; i++) 
-    {
-      A.coord[i] = this->coord[i] + B.coord[i];
-    }
-  return A;
+  Darray& D = *this;
+  return D += (-A);
 }
 
-Darray Darray::operator- (Darray B)
+Darray& Darray::operator=(const Darray &D)
 {
-  Darray A(dim);
-  for (int i = 0; i < dim; i++) 
-    {
-      A.coord[i] = this->coord[i] - B.coord[i];
-    }
-  return A;
+  // Changement de dim possible de this => on fait un resize
+  if (&D != this) {
+    if (D.size() != size()) 
+      resize(D.size(), 0); // initialisation inutile car on modifie après
+    
+    memcpy(coord, D.coord, dim * sizeof(double));
+  }
+  return *this;
 }
 
-Darray Darray::operator- ()
+
+void Darray::resize(const int d, const double v)
 {
-  Darray A(dim);
-  for (int i = 0; i < dim; i++) 
+  if (d < dim)
+      dim = d;
+  if (d > dim) 
     {
-      A.coord[i] = -this->coord[i];
-    }
-  return A;
+      // On fait une allocation
+      double *c = new double[d];
+      // On initialise les coordonnees
+      for (int i = 0; i < d; i++) 
+	{
+	  if (i < dim)
+	    c[i] = coord[i];
+	  else
+	    c[i] = v;
+	}
+      // On libère l'ancien
+      delete [] coord;
+      // Et on fait pointer le nouveau sur l'ancien     
+      coord = c;
+      dim = d;
+    } 
 }
-
-

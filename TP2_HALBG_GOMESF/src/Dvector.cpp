@@ -239,11 +239,7 @@ Dvector& Dvector::operator += (const double d)
 Dvector& Dvector::operator -= (const double d)
 {
   Dvector& D = *this;
-
-  for (int i = 0; i < D.size(); i++) {
-    D.coord[i] -= d;
-  }
-  return D;
+  return D += (-d);
 }
 
 Dvector& Dvector::operator *= (const double d)
@@ -263,11 +259,7 @@ Dvector& Dvector::operator /= (const double d)
   }
   else {
     Dvector& D = *this;
-    
-    for (int i = 0; i < D.size(); i++) {
-      D.coord[i] /= d;
-    }
-    return D;
+    return D *= (1/d);
   }
 }
 
@@ -290,24 +282,13 @@ Dvector& Dvector::operator += (const Dvector A)
 
 Dvector& Dvector::operator -= (const Dvector A)
 {
-  if (A.size() != this->dim) 
-    {
-      throw invalid_argument("taille incompatible");
-    }
-  else 
-    {
-      Dvector& D = *this; 
-      for (int i = 0; i < dim; i++) 
-	{
-	  D.coord[i] -= A(i);
-	}
-      return D;
-    }
+  Dvector& D = *this;
+  return D += (-A);
 }
 
 Dvector& Dvector::operator=(const Dvector &D)
 {
-  // ATTENTION : Changement de dim possible de this => on fait un resize
+  // Changement de dim possible de this => on fait un resize
   if (&D != this) {
     if (D.size() != size()) 
       resize(D.size(), 0); // initialisation inutile car on modifie après
@@ -352,7 +333,7 @@ bool Dvector::operator!=(const Dvector &D) const
 
 void Dvector::resize(const int d, const double v)
 {
-  if (d < dim) // Faire un free ?
+  if (d < dim)
       dim = d;
   if (d > dim) 
     {

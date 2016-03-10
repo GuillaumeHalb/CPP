@@ -15,13 +15,19 @@ int main() {
 
   /* Test de l'operateur d'accession */
   std::cout << "ACCESSION :" << std::endl; 
-  for (int i = 0; i < v.size(); i++)
-    std::cout << "v(" << i << ") = " << v(i) << std::endl;
+  // for (int i = 0; i < v.size(); i++)
+    //  std::cout << "v(" << i << ") = " << v(i) << std::endl; 
   for (int i = 0; i < v.size(); i++)
     {
       v(i) = i;
-      std::cout << "v(" << i << ") = " << v(i) << std::endl;
+      // std::cout << "v(" << i << ") = " << v(i) << std::endl;
     }
+
+  std::cout << "v :" << std::endl;
+  v.display(std::cout);
+  std::cout << "v1 :" << std::endl;
+  v1.display(std::cout);
+
   // Cas limite (3 > dim ) 
   // std::cout << "v(3) = " << v(3) << std::endl;
 

@@ -4,21 +4,21 @@
  * \author Halb Guillaume, Gomes Filipe
  */
 
-#include "Dvector.h"
+#include "Darray.h"
 #include <iostream>
 #include <cstdlib>
 
 int main() {
-  Dvector v1(1);
+  Darray v1(1);
   v1(0) = 0.0;
-  const Dvector v2(1);
+  const Darray v2(1);
   double val = v2(0);
-  std::cout << val<<std::endl;
+  std::cout << val <<std::endl;
   
   /* Test opérateurs binaires */
-  Dvector vect1(3, 6);
-  Dvector vect2(3, 2);
-  Dvector res(3);
+  Darray vect1(3, 6);
+  Darray vect2(3, 2);
+  Darray res(3);
   double scal = 2.0;
   
   std::cout << "test de: + "<<std::endl;
