@@ -106,9 +106,7 @@ double& Darray::operator() (int i) const
     exit(-1);
     }
   else 
-    {
-      return coord[i];
-    }
+    return coord[i];
 }
 
 
