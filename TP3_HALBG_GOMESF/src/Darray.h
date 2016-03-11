@@ -87,8 +87,6 @@ public :
      */
   Darray(std::string s);
 
-  double* coordonnees();
-
   // Accesseur à l'élément i
   double& operator()(int i) const;
   double& operator()(int i);

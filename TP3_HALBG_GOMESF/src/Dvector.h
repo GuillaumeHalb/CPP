@@ -17,9 +17,22 @@
  *
  */
 
-class Dvector :
-  public Darray
+class Dvector : public Darray
 {
+ public :
+
+  Dvector();
+  
+  Dvector(int d, double val = 1.0);
+
+  ~Dvector();
+
+  Dvector(const Darray &A);
+
+  Dvector(std::string s);
+
 };
+
+double operator* (const Dvector &V1, const Dvector &V2);
 
 #endif /* DVECTOR_H_ */

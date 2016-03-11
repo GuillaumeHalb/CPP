@@ -11,50 +11,36 @@
 #include <fstream>
 #include <string>
 #include <stdexcept>
+#include "Darray.h"
 
 using namespace std;
 using std::ifstream; 
 
-/*
-Dvector::Dvector() : Darray() 
+
+Dvector::Dvector():Darray::Darray() 
 {}
 
-Dvector::Dvector(int d, double val) : Darray(int d, double val)
+Dvector::Dvector(int d, double val):Darray::Darray(d, val)
 {}
 
-Dvector::~Dvector() {
-}
-
-int Dvector::fillRandomly() {
-  static bool init = false;
-  if (!init) 
-  {
-    init= true;
-    srand(time(0));
-  }
-  for (int i = 0; i < dim; i++) {
-    coord[i] = (double) rand()/RAND_MAX;
-  }
-  return 1;
-}
-
-
-Dvector::Dvector(const Dvector & D) : Darray(const Dvector & D)
+Dvector::~Dvector() 
 {}
 
-Dvector::Dvector(std::string s) : Darray(std::string s)
+Dvector::Dvector(const Darray & A):Darray::Darray(A)
 {}
-*/
-/*
-double Dvector::operator *(Dvector &A, Dvector &B )
+
+Dvector::Dvector(std::string s):Darray::Darray(s)
+{}
+
+double operator *(const Dvector &A, const Dvector &B )
 {
-  if (A.dim != B.dim) 
+  if (A.size() != B.size()) 
     throw invalid_argument("Dimensions non compatibles");
   
-  double sum=0;
-  for (int i=0; i<A.dim; i++) 
-    sum += A.coord(i) * B.coord(i);
+  double sum = 0;
+  for (int i = 0; i < A.size(); i++) 
+    sum += A(i)*B(i);
   
   return sum;
 }
-*/
+
