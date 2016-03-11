@@ -15,14 +15,13 @@
 using namespace std;
 using std::ifstream; 
 
-
+/*
 Dvector::Dvector() : Darray() 
 {}
 
 Dvector::Dvector(int d, double val) : Darray(int d, double val)
 {}
 
-/* Destructeur */
 Dvector::~Dvector() {
 }
 
@@ -45,7 +44,8 @@ Dvector::Dvector(const Dvector & D) : Darray(const Dvector & D)
 
 Dvector::Dvector(std::string s) : Darray(std::string s)
 {}
-
+*/
+/*
 double Dvector::operator *(Dvector &A, Dvector &B )
 {
   if (A.dim != B.dim) 
@@ -57,3 +57,4 @@ double Dvector::operator *(Dvector &A, Dvector &B )
   
   return sum;
 }
+*/
