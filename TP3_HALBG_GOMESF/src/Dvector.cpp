@@ -44,3 +44,14 @@ double operator *(const Dvector &A, const Dvector &B )
   return sum;
 }
 
+void Dvector::display (std::ostream &str) const 
+{
+  for (int i = 0; i < dim; i++) 
+      str<<coord[i]<<std::endl;
+}
+
+ostream & operator <<(ostream &Out, const Dvector &A)
+{
+  A.display(Out);
+  return Out;
+}

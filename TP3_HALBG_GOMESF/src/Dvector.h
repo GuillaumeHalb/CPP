@@ -30,8 +30,11 @@ class Dvector : public Darray
   Dvector(const Darray &A);
 
   Dvector(std::string s);
+  
+  void display(std::ostream &str) const;
 
 };
+std::ostream& operator<< (std::ostream &Out, const Dvector &A);
 
 double operator* (const Dvector &V1, const Dvector &V2);
 

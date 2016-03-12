@@ -25,7 +25,7 @@ Darray::Darray ()
     {
       coord[i] = 0.0;
     }
-  cout << "Utilisation du constructeur par défaut" << std::endl;
+  // cout << "Utilisation du constructeur par défaut" << std::endl;
 }
 
 Darray::Darray (int d, double val)
@@ -36,14 +36,13 @@ Darray::Darray (int d, double val)
     {
       coord[i] = val;
     }
-    cout << "Utilisation du constructeur avec arguments" << std::endl;
-
+  // cout << "Utilisation du constructeur avec arguments" << std::endl;
 }
 
 /* Destructeur */
 Darray::~Darray() {
   delete [] coord;
-  cout << "Utilisation du destructeur" << std::endl;
+  // cout << "Utilisation du destructeur" << std::endl;
 }
 
 // Affiche le Dvector
@@ -67,7 +66,7 @@ Darray::Darray(const Darray & D)
   coord = new double[dim];
   for (int i=0; i<dim; i++)
     coord[i]=D.coord[i];
-    cout << "Utilisation du constructeur par copie" << std::endl;
+  // cout << "Utilisation du constructeur par copie" << std::endl;
 
 }
 
@@ -94,7 +93,7 @@ Darray::Darray(std::string s)
       { 
 	coord = NULL;
       }
-      cout<<"Utilisation du constructeur par lecture de fichier"<<endl;
+    // cout<<"Utilisation du constructeur par lecture de fichier"<<endl;
 
 }
 
