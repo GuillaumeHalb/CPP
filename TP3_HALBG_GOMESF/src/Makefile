@@ -1,5 +1,5 @@
 PROG = Darray Dvector Dmatrix
-OBJS = Darray.o Main.o Dvector.o Dmatrix.o
+OBJS = Darray.o TestDmatrix.o Dvector.o Dmatrix.o
 CXX = g++
 CXXFLAGS = -Wall -g
 

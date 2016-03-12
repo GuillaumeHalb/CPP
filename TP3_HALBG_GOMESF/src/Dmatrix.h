@@ -68,7 +68,12 @@ class Dmatrix : public Darray {
   Dvector column (int column) const;
 
   Dmatrix& transpose();
+
+  void display (std::ostream &str) const;
+
+  Dmatrix cholesky();
 }; 
+std::ostream& operator<< (std::ostream &Out, const Dmatrix &M);
 
 Dvector operator * (const Dvector &V, const Dmatrix &M);
 Dvector operator * (const Dmatrix &M, const Dvector &V);

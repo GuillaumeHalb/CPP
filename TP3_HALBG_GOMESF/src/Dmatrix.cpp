@@ -23,10 +23,13 @@ Dmatrix::Dmatrix() : Darray::Darray()
   c = 2;
 }
   
-Dmatrix::Dmatrix(int l, int c, double val) : Darray(l*c, val)
+Dmatrix::Dmatrix(int ligne, int column, double val) : Darray(l*c, val)
 {
-  l = l;
-  c = c;
+  l = ligne;
+  c = column;
+  coord = new double[l*c];
+  for (int i = 0; i < l*c; i++) 
+    coord[i] = val;
 }
 
 Dmatrix::~Dmatrix() 
@@ -37,6 +40,11 @@ Dmatrix::Dmatrix(const Dmatrix &M) : Darray(M)
 {
   l = M.lines();
   c = M.columns();
+
+  coord = new double[l*c];
+  for (int i = 0; i < l; i++) 
+    for (int j = 0; j < c; j++)
+      coord[i*c + j] = M(i,j);
 }
 
 int Dmatrix::lines() const
@@ -144,4 +152,20 @@ Dmatrix& Dmatrix::transpose()
 
   *this = Res;
   return (*this);
+}
+
+ostream & operator <<(ostream &Out, const Dmatrix &M)
+{
+  M.display(Out);
+  return Out;
+}
+
+void Dmatrix::display (std::ostream &str) const 
+{
+  for (int i = 0; i < l; i++) 
+    {
+    for (int j = 0; j < c; j++)
+      str << coord[c*i + j] << "    ";
+    str << endl;
+    }
 }
