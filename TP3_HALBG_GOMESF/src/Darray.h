@@ -18,7 +18,7 @@
 
 class Darray
 {
-private :
+protected :
   int dim; /*! dimension du array */
   double *coord; /*! Tableau listant les coordonnées du array, de taille dim */
 

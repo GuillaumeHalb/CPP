@@ -56,8 +56,8 @@ class Dmatrix : public Darray {
   int lines() const;
   int columns() const;
 
-  double& operator()(int line, int column) const;
-  double& operator()(int line, int column);
+  double operator()(int line, int column) const;
+  double &operator()(int line, int column);
 
   /* -------------------------- Autres ----------------------------- */
 
