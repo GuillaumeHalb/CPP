@@ -1,6 +1,6 @@
 /*!
  * \file Dmatrix.cpp
- * \brief vecteur de dimension n ainsi que ses n coordoonnées
+ * \brief matrice de dimension l*c ainsi que ses coordoonnées
  * \author Halb Guillaume, Gomes Filipe
  */
 

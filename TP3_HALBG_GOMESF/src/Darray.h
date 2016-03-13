@@ -10,9 +10,8 @@
 #include <iostream>
 
 /*! \class Darray
-   * \brief classe representant le vecteur
+   * \brief classe representant un tableau de dimension dim
    *
-   *  La classe gère un vecteur de dimension n
    *
    */
 
@@ -35,19 +34,19 @@ public :
 /*!
      *  \brief Constructeur 
      *
-     *  Constructeur classique de la classe Dvector. 
-     *  Initialise la dimension et toutes les coordonnées du vecteur à une 
+     *  Constructeur classique de la classe Darray. 
+     *  Initialise la dimension et toutes les cases du tableau à une 
      *  seule et même valeur.
      *  Cet argument peut être optionnel et sera remplacé par 1.0 dans ce cas. 
-     *  \param d : dimension donnée du vecteur
-     *  \param val : flottant désignant la valeur des coordonnées
+     *  \param d : dimension donnée du tableau
+     *  \param val : flottant désignant la valeur des cases
      */
   Darray (int d, double val= 1.0);
 
   /*!
      *  \brief Destructeur
      *
-     *  Destructeur de la classe Dvector
+     *  Destructeur de la classe Darray
      */
   ~Darray();
 
@@ -61,27 +60,27 @@ public :
   void display (std::ostream &str);
 
   /**
- * \fn int Dvector::size()
- * \brief Fonction retournant la dimension du vecteur
+ * \fn int Darray::size()
+ * \brief Fonction retournant la dimension du tableau
  *
- * \return entier correspondant à la taille (ou dimension) du vecteur.
+ * \return entier correspondant à la taille (ou dimension) du tableau.
  */
   int size() const;
 
   /*!
      *  \brief Constructeur par copie
      *
-     *  Constructeur par recopie de la classe Dvector. 
-     *  Recopie les attributs dim et coord dans le vecteur courant.
-     *  \param D instance de la classe Dvector
+     *  Constructeur par recopie de la classe Darray. 
+     *  Recopie les attributs dim et coord dans le tableau courant.
+     *  \param D instance de la classe Darray.
      */
   Darray (const Darray & D);
 
   /*!
-     *  \brief Constructeur d'un vecteur depuis un fichier de données.
+     *  \brief Constructeur d'un tableau depuis un fichier de données.
      *
-     *  Constructeur de la classe Dvector. 
-     *  Il remplit les coordoonées du vecteur avec les données du fichier passé
+     *  Constructeur de la classe Darray. 
+     *  Il remplit les cases du tableau avec les données du fichier passé
      *  en argument. La dimension sera le nombre de lignes du fichier.
      *  \param s : string contenant le nom du fichier contenant les données.
      */
