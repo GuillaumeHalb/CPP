@@ -30,7 +30,7 @@ class Dmatrix : public Darray {
      *  Initialise la dimension et toutes les coordonnées du vecteur à une 
      *  seule et même valeur.
      *  Cet argument peut être optionnel et sera remplacé par 1.0 dans ce cas. 
-     *  \param l, c : dimension donnée du vecteur
+     *  \param l, c : dimension donnée de la matrice
      *  \param val : double désignant la valeur des coordonnées
      */
   Dmatrix (int l, int c, double val= 1.0);
@@ -47,7 +47,7 @@ class Dmatrix : public Darray {
      *
      *  Constructeur par recopie de la classe Dmatrix. 
      *  Recopie les attributs m, n et coord dans le vecteur courant.
-     *  \param D instance de la classe Dvector
+     *  \param D instance de la classe Dmatrix
      */
   Dmatrix (const Dmatrix & M);
 
