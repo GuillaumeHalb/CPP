@@ -19,7 +19,7 @@ using std::ifstream;
 
 Darray::Darray () 
 {
-  dim = 2;
+  dim = 0;
   coord = new double[dim];
   for (int i = 0; i < dim; i++) 
     {
