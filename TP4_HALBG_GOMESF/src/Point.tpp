@@ -1,18 +1,18 @@
-#include "Point.h"
-#include <iostream>
-
-Point::Point(double abs, double ord) 
+Point::Point(double x, double y) 
 {
-	x=abs;
-	y=ord;
+	abs = x;
+	ord = y;
 }
 
-double& Point::x()
+double Point::x() const
 {
-  return x;
+  return abs;
 }
 
-double& Point::y()
+double Point::y() const
 {
-  return y;
+  return ord;
 }
+
+Point::~Point()
+{}

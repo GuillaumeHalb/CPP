@@ -1,18 +1,20 @@
 #ifndef POINT_H_
 #define POINT_H_
 
-#include <iostream>
-
 class Point
 {
  private :
-  double x,y;
+  double abs;
+  double ord;
 
  public :
-  Point(double abs, double ord);
-  ~Point;
-  double& x();
-  double& y();
+  Point(double x, double y);
+  ~Point();
+  double x() const;
+  double y() const;
 };
 
- #endif /*POINT_H_*/
+#include "Point.tpp"
+
+#endif /*POINT_H_*/
+

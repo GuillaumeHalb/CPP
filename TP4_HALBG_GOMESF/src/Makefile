@@ -1,5 +1,5 @@
-PROG = Point Triangle
-OBJS = Point.o Triangle.o
+PROG = main
+OBJS = main.o
 CXX = g++
 CXXFLAGS = -Wall -g
 
@@ -11,3 +11,4 @@ check: $(PROG)
 
 clean: 
 	rm $(OBJS) $(PROG)
+	rm *~
