@@ -4,20 +4,23 @@
 #include <iostream>
 #include "Point.h"
 
+template <typename T>
 class Triangle {
  private :
 
-  Point p1; 
-  Point p2;
-  Point p3;
+  Point<T> point1; 
+  Point<T> point2;
+  Point<T> point3;
 
  public :
   
-  Triangle(Point pt1, Point pt2, Point pt3);
+  Triangle(Point<T> pt1, Point<T> pt2, Point<T> pt3);
   
-  Point p1() const;
-  Point p2() const;
-  Point p3() const;
+  Point<T> p1() const;
+  Point<T> p2() const;
+  Point<T> p3() const;
 }; 
+
+#include "Triangle.tpp"
 
 #endif /* DMATRIX_H_ */

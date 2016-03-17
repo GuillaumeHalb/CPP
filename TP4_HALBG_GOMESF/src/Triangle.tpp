@@ -1,23 +1,25 @@
-#include "Triangle.h"
-
-Triangle::Triangle(Point pt1, Point pt2, Point pt3)
+template<typename T>
+Triangle<T>::Triangle(Point<T> pt1, Point<T> pt2, Point<T> pt3)
 {
-  p1 = pt1;
-  p2 = pt2;
-  p3 = pt3;
+  point1 = pt1;
+  point2 = pt2;
+  point3 = pt3;
 }
 
-Point Triangle::p1()
+template<typename T>
+Point<T> Triangle<T>::p1() const
 {
-  return p1;
+  return point1;
 }
 
-Point Triangle::p2()
+template<typename T>
+Point<T> Triangle<T>::p2() const
 {
-  return p2;
+  return point2;
 }
 
-Point Triangle::p2()
+template<typename T>
+Point<T> Triangle<T>::p3() const
 {
-  return p3;
+  return point3;
 }
