@@ -1,18 +1,28 @@
-Point::Point(double x, double y) 
+template<typename T>
+Point<T>::Point(T x, T y) 
 {
 	abs = x;
 	ord = y;
 }
 
-double Point::x() const
+template<typename T>
+T Point<T>::x() const
 {
   return abs;
 }
 
-double Point::y() const
+template<typename T>
+T Point<T>::y() const
 {
   return ord;
 }
 
-Point::~Point()
+template<typename T>
+void Point<T>::affiche(std::ostream &out) const
+{
+  out << "(x = " << abs << ", y = " << ord << ")"<< std::endl;
+}
+
+template<typename T>
+Point<T>::~Point()
 {}

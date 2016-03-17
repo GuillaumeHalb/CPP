@@ -2,6 +2,8 @@
 
 
 int main() {
-  Point p(1.0,2.0);
+  Point<float> p(2,3);
+  p.affiche(std::cout);
+
   return 0;
 }

@@ -1,17 +1,21 @@
 #ifndef POINT_H_
 #define POINT_H_
 
+#include <iostream>
+
+template <typename T>
 class Point
 {
  private :
-  double abs;
-  double ord;
+  T abs;
+  T ord;
 
  public :
-  Point(double x, double y);
+  Point(T x, T y);
   ~Point();
-  double x() const;
-  double y() const;
+  T x() const;
+  T y() const;
+  void affiche(std::ostream &out) const;
 };
 
 #include "Point.tpp"
