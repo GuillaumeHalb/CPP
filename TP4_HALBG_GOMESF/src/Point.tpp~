@@ -1,8 +1,0 @@
-#include "Point.h"
-
-Point::Point(double abs, double ord) 
-{
-	x=abs;
-	y=ord;
-}
-       
