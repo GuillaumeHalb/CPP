@@ -6,10 +6,8 @@
  */
 
 
-template<typename T, typename U>
-Maillage<T,U>::Maillage(int m, int n, const Point<T>& orig) {
-    longueur = m;
-    hauteur = n;
-    origine = orig;
+template<typename T, template <typename, typename> class Container>
+Maillage<T, Container>::Maillage(int m, int n, const Point<T>& orig)
+{
+	
 }
-

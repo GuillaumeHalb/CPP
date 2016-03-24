@@ -11,7 +11,7 @@ class Point
   T ord;
 
  public :
-  Point(T x, T y);
+  Point(T x = 0, T y = 0);
   ~Point();
   T x() const;
   T y() const;

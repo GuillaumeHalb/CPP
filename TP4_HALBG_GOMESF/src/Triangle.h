@@ -19,6 +19,8 @@ class Triangle {
   Point<T> p1() const;
   Point<T> p2() const;
   Point<T> p3() const;
+
+  void affiche(std::ostream &out) const;
 }; 
 
 #include "Triangle.tpp"

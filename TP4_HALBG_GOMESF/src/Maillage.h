@@ -9,17 +9,15 @@
 #ifndef MAILLAGE_H
 #define	MAILLAGE_H
 
-template<typename T, typename U>
+template<typename T, template <typename, typename> class Container>
 class Maillage {
 public:
-    Maillage(int m, int n, const Point<T>& orig);
-    ~Maillage();
-    beginiter();
-    enditer();
+  Maillage(int m, int n, const Point<T>& orig);
+  // ~Maillage();
+    //beginiter();
+    // enditer();
 private:
-    int longueur;
-    int hauteur;
-    Point<T> origine;
+  Container <Triangle<T>, std::allocator<Triangle<T> > > maillage;
 };
 
 #include "Maillage.tpp"
