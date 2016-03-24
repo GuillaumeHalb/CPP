@@ -5,14 +5,11 @@
  * Created on 24 mars 2016, 11:48
  */
 
-#include "Maillage.h"
 
-Maillage::Maillage() {
-}
-
-Maillage::Maillage(const Maillage& orig) {
-}
-
-Maillage::~Maillage() {
+template<typename T, typename U>
+Maillage<T,U>::Maillage(int m, int n, const Point<T>& orig) {
+    longueur = m;
+    hauteur = n;
+    origine = orig;
 }
 
