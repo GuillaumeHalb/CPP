@@ -11,6 +11,7 @@
 #include <fstream>
 #include <string>
 #include <memory.h>
+#include <stdexcept>
 
 using namespace std;
 using std::ifstream; 
@@ -72,15 +73,20 @@ int Dvector::fillRandomly() {
 }
 
 
-Dvector::Dvector(const Dvector & D) 
+Dvector::Dvector(const Dvector &D) 
 {
-  dim = D.dim;
-  if (dim == 0) return; //vecteur null
-  coord = new double[dim];
-  for (int i=0; i<dim; i++)
-    coord[i]=D.coord[i];
-    cout << "Utilisation du constructeur par copie" << std::endl;
-
+  if (D.size() == 0) 
+    {
+      dim = 0;
+    }
+  else 
+    {
+      dim = D.dim;
+      coord = new double[dim];
+      for (int i=0; i<dim; i++)
+	coord[i]=D.coord[i];
+      cout << "Utilisation du constructeur par copie" << std::endl;
+    }
 }
 
 Dvector::Dvector(std::string s)
@@ -137,78 +143,72 @@ double& Dvector::operator() (const int i)
 }
 
 
-Dvector Dvector::operator+ (const double d) const
+Dvector operator+ (const double d, const Dvector &D)
 {
-  Dvector A(dim);
-  for (int i = 0; i < dim; i++) 
-    A(i) = this->coord[i] + d;
+  Dvector A(D);
+  for (int i = 0; i < D.size(); i++) 
+    A(i) = D(i) + d;
   return A;
 }
 
-Dvector Dvector::operator- (const double d) const
+Dvector operator+ (const Dvector &D, const double d) 
 {
-  Dvector A(dim);
-  for (int i = 0; i < dim; i++) 
+  return d + D;
+}
+
+Dvector operator- (const Dvector &D, const double d)
+{
+  return D + (-d);
+}
+
+Dvector operator* (const double d, const Dvector &D)
+{
+  Dvector A(D.size());
+  for (int i = 0; i < D.size(); i++) 
     {
-      A.coord[i] = this->coord[i] - d;
+      A(i) = D(i) * d;
     }
   return A;
 }
 
-Dvector Dvector::operator* (const double d) const
+Dvector operator* (const Dvector &D, const double d)
 {
-  Dvector A(dim);
-  for (int i = 0; i < dim; i++) 
-    {
-      A.coord[i] = this->coord[i] * d;
-    }
-  return A;
+  return d*D;
 }
 
-Dvector Dvector::operator/ (const double d) const
+Dvector operator/ (const Dvector &D, const double d)
 {
   if (d == 0)
     {
-      cout<<"Division par 0 !"<<endl;
-      exit(-1);
+      throw invalid_argument("Division par 0");
     }
   else 
     {
-      Dvector A(dim);
-      for (int i = 0; i < dim; i++) 
-	{
-	  A.coord[i] = this->coord[i] / d;
-	}
-      return A;
+      return (1/d)*D;
     }
 }
 
-Dvector Dvector::operator+ (const Dvector B) const
+Dvector operator+ (const Dvector &B, const Dvector &D)
 {
-  Dvector A(dim);
-  for (int i = 0; i < dim; i++) 
+  Dvector A(B.size());
+  for (int i = 0; i < B.size(); i++) 
     {
-      A.coord[i] = this->coord[i] + B(i);
+      A(i) = B(i) + D(i);
     }
   return A;
 }
 
-Dvector Dvector::operator- (const Dvector B) const
+Dvector operator- (const Dvector &B,  const Dvector &D)
 {
-  Dvector A(dim);
-  for (int i = 0; i < dim; i++) 
-    {
-      A.coord[i] = this->coord[i] - B(i);
-    }
-  return A;
+  return B + (-D);
 }
 
-Dvector Dvector::operator- () const
+Dvector operator- (const Dvector &D)
 {
-  Dvector A(dim);
-  for (int i = 0; i < dim; i++) 
+  Dvector A(D.size());
+  for (int i = 0; i < D.size(); i++) 
     {
-      A.coord[i] = -this->coord[i];
+      A(i) = -D(i);
     }
   return A;
 }
@@ -239,11 +239,7 @@ Dvector& Dvector::operator += (const double d)
 Dvector& Dvector::operator -= (const double d)
 {
   Dvector& D = *this;
-
-  for (int i = 0; i < D.size(); i++) {
-    D.coord[i] -= d;
-  }
-  return D;
+  return D += (-d);
 }
 
 Dvector& Dvector::operator *= (const double d)
@@ -259,15 +255,11 @@ Dvector& Dvector::operator *= (const double d)
 Dvector& Dvector::operator /= (const double d)
 {
   if (d == 0.0) {
-    exit(-1); // division par 0
+    throw invalid_argument("Division par 0");
   }
   else {
     Dvector& D = *this;
-    
-    for (int i = 0; i < D.size(); i++) {
-      D.coord[i] /= d;
-    }
-    return D;
+    return D *= (1/d);
   }
 }
 
@@ -275,7 +267,7 @@ Dvector& Dvector::operator += (const Dvector A)
 {
   if (A.size() != this->dim) 
     {
-      exit(-1); // dimensions incompatibles
+      throw invalid_argument("taille incompatible");
     }
   else 
     {
@@ -290,37 +282,32 @@ Dvector& Dvector::operator += (const Dvector A)
 
 Dvector& Dvector::operator -= (const Dvector A)
 {
-  if (A.size() != this->dim) 
-    {
-      exit(-1); // dimensions incompatibles
-    }
-  else 
-    {
-      Dvector& D = *this; 
-      for (int i = 0; i < dim; i++) 
-	{
-	  D.coord[i] -= A(i);
-	}
-      return D;
-    }
+  Dvector& D = *this;
+  return D += (-A);
 }
 
-void Dvector::operator=(const Dvector &D)
+Dvector& Dvector::operator=(const Dvector &D)
 {
-  // ATTENTION : Changement de dim possible de this => on fait un resize
-  if (D.size() != size()) 
-    resize(D.size(), 0); // initialisation inutile car on modifie après
-
-  memcpy(coord, D.coord, dim * sizeof(double));
+  // Changement de dim possible de this => on fait un resize
+  if (&D != this) {
+    if (D.size() != size()) 
+      resize(D.size(), 0); // initialisation inutile car on modifie après
+    
+    memcpy(coord, D.coord, dim * sizeof(double));
+  }
+  return *this;
 }
 
 /*
-void Dvector::operator=(const Dvector D)
+Dvector& Dvector::operator=(const Dvector &D)
 {
-  dim = D.size();
-  coord = new double[dim];
-  for (int i = 0; i < dim; i++)
+  if (&D != this) {
+    dim = D.size();
+    coord = new double[dim];
+    for (int i = 0; i < dim; i++)
       coord[i] = D(i);
+  }
+  return *this;
 }
 */
 
@@ -339,9 +326,14 @@ bool Dvector::operator==(const Dvector &D) const
   return true;
 }
 
+bool Dvector::operator!=(const Dvector &D) const
+{
+  return !(*this == D);
+}
+
 void Dvector::resize(const int d, const double v)
 {
-  if (d < dim) // Faire un free ?
+  if (d < dim)
       dim = d;
   if (d > dim) 
     {

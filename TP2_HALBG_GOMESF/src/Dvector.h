@@ -107,6 +107,7 @@ public :
   double& operator()(const int i) const;
   double& operator()(const int i);
     
+<<<<<<< HEAD
   /*!
      * \fn Dvector operator + (const double d) const;
      *  \brief Surcharge d'opérateur +.
@@ -171,6 +172,9 @@ public :
      *  Opérateur entre un vecteur et scalaire.
      *  \param d : scalaire utilisé lors de l'opération nouvellement définie.
      */
+=======
+  // Surcharges d'opérateur
+>>>>>>> dc36e90c4f40e5f24ea3ba622c91282003efee30
   Dvector& operator += (const double d);
   /*!
      *  \fn Dvector operator -= (const double d) 
@@ -212,6 +216,7 @@ public :
      *  \param A : vecteur utilisé lors de l'opération nouvellement définie.
      */
   Dvector& operator -= (const Dvector A);
+<<<<<<< HEAD
   /*!
      *  \fn void operator = (const Dvector &D) 
      *  \brief Surcharge de l'opérateur d'affectation.
@@ -242,12 +247,31 @@ public :
      *  \param d : dimension du nouveau vecteur.
      *  \param v : valeur des nouvelles composantes du vecteur.
      */
+=======
+
+  Dvector& operator =(const Dvector &D);
+
+  bool operator==(const Dvector &D) const;
+  bool operator!=(const Dvector &D) const;
+
+>>>>>>> dc36e90c4f40e5f24ea3ba622c91282003efee30
   void resize(const int d, const double v);
 };
+
 std::ostream& operator<< (std::ostream &Out, const Dvector &A);
 std::istream& operator>> (std::istream &In, const Dvector &A);
 
+Dvector operator+ (const double d, const Dvector &D);
+Dvector operator- (const Dvector &D, const double d);
+Dvector operator* (const double d, const Dvector &D);
+Dvector operator/ (const Dvector &D, const double d);
 
+Dvector operator+ (const Dvector &D, const double d);
+Dvector operator* (const Dvector &D, const double d);
+
+Dvector operator+ (const Dvector &B, const Dvector &D);
+Dvector operator- (const Dvector &B, const Dvector &D);
+Dvector operator- (const Dvector &D);
 
 
 #endif /* DVECTOR_H_ */
