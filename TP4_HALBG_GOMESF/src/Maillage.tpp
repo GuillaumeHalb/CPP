@@ -11,8 +11,8 @@
 template<typename T, template <typename, typename> class Container>
 Maillage<T, Container>::Maillage(int m, int n, const Point<T>& orig)
 {
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < m; j++) {
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
 			Point<T> p0(i,j);
 			Point<T> p1((i+1),j);
 			Point<T> p2(i,(j+1));
@@ -91,8 +91,6 @@ template<typename T, template <typename, typename> class Container>
 void Maillage<T, Container>::tourner(double angle, const Point<T>& pt) 
 {
 	typename Container <Triangle<T>, std::allocator<Triangle<T> > > ::iterator it;
-			
-
 
 	for(it = (*this).maillage.begin();  it != (*this).maillage.end(); it++)
 	{
@@ -104,16 +102,17 @@ template<typename T, template <typename, typename> class Container>
 Maillage<T,Container>::Maillage(const Point<T>& p1, const Point<T>& p2, const Point<T>& p3, const Point<T>& p4, int m, int n)
 {
 	//cas invalides
-	if (m==0 || n==0)
+	if (m==0 || n==0) {
 		throw std::invalid_argument("Il faut que m ou n soit supérieur à 1");
-	if (p1.dist(p2) != p3.dist(p4) || p1.dist(p4) != p2.dist(p3))
+	}
+	if (p1.dist(p2) != p3.dist(p4) || p1.dist(p4) != p2.dist(p3)) {
 		throw std::invalid_argument("L'objet consideré n'est pas un rectangle");
-
+	}
 
 	//Création du maillage initial à partir de p(0.0,0.0)
 	Point<T> p(0.0,0.0);
 	Maillage<T, Container> mailleInit(m, n, p);
-	mailleInit.beginiter().affiche(std::cout);
+
 	//Redimensionnement à la bonne échelle
 	mailleInit.transformer(p1.dist(p2)/m, 0, 0, p3.dist(p1)/n); 
 
@@ -121,7 +120,15 @@ Maillage<T,Container>::Maillage(const Point<T>& p1, const Point<T>& p2, const Po
 	mailleInit.deplacer(p1.x(),p1.y());
 
 	//Dernière étape: positionner le rectangle (avec une rotation si besoin)
-	if (!(p2.y() == p1.y()))
-		mailleInit.tourner(atan(p1.dist(p3)/p1.dist(p2)), p1);
+	if (!(p2.y() == p1.y())) {
+		mailleInit.tourner(atan((p2.y()-p1.y())/(p2.x()-p1.x())), p1);
+	}
 
+	(*this).maillage = mailleInit.getMaillage();
+}
+
+template<typename T, template <typename, typename> class Container>
+Container <Triangle<T>, std::allocator<Triangle<T> > > Maillage<T,Container>::getMaillage()
+{
+	return (*this).maillage;
 }

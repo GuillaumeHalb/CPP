@@ -10,7 +10,7 @@ int main() {
   
   std::cout<<"test transformation(1.0,1.0,1.0,1.0) -> ";
   p.transformer(1.0,1.0,1.0,1.0);
-  p.affiche(std::cout);
+  //p.affiche(std::cout);
   std::cout<<std::endl;
 
   //std::cout<<"test deplacer(4.2,6.8) -> ";
@@ -39,14 +39,20 @@ int main() {
   */
 
   Maillage<float, std::list> m(1, 2, p);
-  std::cout<<m;
-  m.transformer(2.0,1.0,1.0,1.0);
-  std::cout<<m;
-  m.deplacer(4.0,16.0);
-  std::cout<<m;
+  //std::cout<<m;
+  //m.transformer(2.0,1.0,1.0,1.0);
+  //std::cout<<m;
+  //m.deplacer(4.0,16.0);
+  //std::cout<<m;
 
   Maillage<float, std::list> maille(p,p1,p2,p3,2,3);
-  std::cout<<maille;
+  //std::cout<<maille;
+  Point<float> a(2,3);
+  Point<float> b(7,3);
+  Point<float> c(7,6);
+  Point<float> d(2,6);
+  Maillage<float, std::list> maille1(a, b, c, d, 2, 3 );
+  std::cout<<maille1;
 
   return 0;
 }

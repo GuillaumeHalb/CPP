@@ -25,6 +25,7 @@ public:
    * \param orig point originant le maillage (coin gauche)
    */
   Maillage(int m, int n, const Point<T>& orig);
+
   // ~Maillage();
   /**
    * \fn const_iterator beginiter() const
@@ -64,6 +65,7 @@ public:
    * \param n largeur du maillage
    */
   Maillage(const Point<T>& p1, const Point<T>& p2, const Point<T>& p3, const Point<T>& p4, int m, int n);
+  Container <Triangle<T>, std::allocator<Triangle<T> > > getMaillage();
 private:
   Container <Triangle<T>, std::allocator<Triangle<T> > > maillage;
 };
