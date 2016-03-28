@@ -26,6 +26,23 @@ Point<T> Triangle<T>::p3() const
 }
 
 template<typename T>
+Point<T> Triangle<T>::p1() 
+{
+  return point1;
+}
+
+template<typename T>
+Point<T> Triangle<T>::p2() 
+{
+  return point2;
+}
+
+template<typename T>
+Point<T> Triangle<T>::p3() 
+{
+  return point3;
+}
+template<typename T>
 void Triangle<T>::affiche(std::ostream &out) const
 {
    out << "Affichage du triangle" << std::endl;
@@ -39,7 +56,7 @@ void Triangle<T>::affiche(std::ostream &out) const
 
 
 template<typename T>
-void Triangle<T>::transformer(T m11, T m12, T m21, T m22)
+void Triangle<T>::transformer(T m11, T m12, T m21, T m22) 
 {
   point1.transformer(m11,m12,m21,m22);
   point2.transformer(m11,m12,m21,m22);
@@ -52,4 +69,12 @@ void Triangle<T>::deplacer(T dx, T dy)
   point1.deplacer(dx, dy);
   point2.deplacer(dx, dy);
   point3.deplacer(dx, dy);
+}
+
+template<typename T>
+void Triangle<T>::tourner(double angle, const Point<T>& pt)
+{
+  point1.tourner(angle, pt);
+  point2.tourner(angle, pt);
+  point3.tourner(angle, pt);
 }
